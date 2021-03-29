@@ -1,0 +1,70 @@
+<DOCTYPEhtml>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Infinite Scroller</title>
+		<style>
+			.midAlign{
+				text-align:center;
+			}
+			body{
+				border:5px solid rgb(150,150,150);
+				padding-top:20px;
+				background-color:rgb(255, 255, 220);
+			}
+			.dotSize{
+				font-size:60px;
+				margin:0px;
+				padding:0px;
+			} 
+			#titles{
+				font-size:20px;
+			}
+			#underline{
+				text-decoration:underline;
+			}
+			h1{
+				border-bottom:5px solid rgb(150,150,150);
+				padding-bottom:20px;
+				margin:0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="titles">
+			<h1 class="midAlign">Infinite Scroller</h1>
+			<h2 class="midAlign">There is <span id="underline">no</span> end...</h2>
+			<h3 class="midAlign">Try to find the hidden purple dot!</h3>
+		</div>
+		<div class="midAlign dotSize" id="dot"></div>
+		
+		<script>
+			function getRandom(min, max){
+				var randomNum = Math.floor(Math.random()*(max-min+1))+min
+				return randomNum;
+			}
+			var randomPos = getRandom(1, 200);
+			var dotLoadPos = 0;
+			for (var i = 0; i<30; i++){
+				dotLoadPos++;
+				if(dotLoadPos == randomPos){
+					document.getElementById("dot").innerHTML += "<span style='color:rgb(100,0,100);'>.</span><br>";
+				}else{
+					document.getElementById("dot").innerHTML += ".<br>";
+				}
+			}
+			function scrollAdd() {
+				dotLoadPos++;
+				if(dotLoadPos == randomPos){
+					document.getElementById("dot").innerHTML += "<span style='color:rgb(80,0,80);'>.</span><br>";
+				}else{
+					document.getElementById("dot").innerHTML += ".<br>";
+				}
+			}
+			window.addEventListener("scroll", scrollAdd);
+			window.onbeforeunload = function(){
+				window.scrollTo(0,0);
+			}
+		</script>
+	</body>
+</html>
